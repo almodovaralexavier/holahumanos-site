@@ -8,11 +8,18 @@ const revealItems = document.querySelectorAll('.reveal');
 const progressFill = document.getElementById('scroll-progress-fill');
 const logoStage = document.querySelector('.logo-stage');
 const cursor = document.querySelector('.cursor');
+const introFilm = document.querySelector('.intro-film');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 window.requestAnimationFrame(() => {
   document.body.classList.add('is-ready');
 });
+
+if (introFilm && !prefersReducedMotion) {
+  window.setTimeout(() => {
+    introFilm.remove();
+  }, 3600);
+}
 
 if (yearSpan) {
   yearSpan.textContent = String(new Date().getFullYear());
@@ -144,6 +151,23 @@ if (cursor && !prefersReducedMotion) {
     target.addEventListener('pointerleave', () => {
       cursor.style.width = '';
       cursor.style.height = '';
+    });
+  });
+}
+
+if (!prefersReducedMotion) {
+  const magneticTargets = document.querySelectorAll('.site-nav a, .btn, .link-cta');
+
+  magneticTargets.forEach((target) => {
+    target.addEventListener('pointermove', (event) => {
+      const rect = target.getBoundingClientRect();
+      const relX = event.clientX - (rect.left + rect.width / 2);
+      const relY = event.clientY - (rect.top + rect.height / 2);
+      target.style.transform = `translate(${relX * 0.08}px, ${relY * 0.08}px)`;
+    });
+
+    target.addEventListener('pointerleave', () => {
+      target.style.transform = '';
     });
   });
 }

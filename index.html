@@ -19,6 +19,14 @@
   <body>
     <div class="cursor" aria-hidden="true"></div>
     <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-fill"></span></div>
+    <div class="intro-film" aria-hidden="true">
+      <div class="film-panel panel-top"></div>
+      <div class="film-panel panel-bottom"></div>
+      <picture class="film-logo">
+        <source srcset="holahumanos.webp" type="image/webp" />
+        <img src="holahumanos.svg" alt="" loading="eager" decoding="async" />
+      </picture>
+    </div>
 
     <header class="site-header" id="inicio">
       <a class="logo" href="#inicio" aria-label="Inicio HolaHumanos">
@@ -69,9 +77,18 @@
       </section>
 
       <section class="collective" id="colectivo">
-        <p class="roles reveal" data-delay="40">
-          estrategas · diseñadores · ingenieros · storytellers · operadores · growth leaders · motion designers · investigadores
-        </p>
+        <div class="roles-marquee reveal" data-delay="40">
+          <div class="roles-track">
+            <span
+              >estrategas · diseñadores · ingenieros · storytellers · operadores · growth leaders · motion designers ·
+              investigadores ·</span
+            >
+            <span aria-hidden="true"
+              >estrategas · diseñadores · ingenieros · storytellers · operadores · growth leaders · motion designers ·
+              investigadores ·</span
+            >
+          </div>
+        </div>
       </section>
 
       <section class="principles">
