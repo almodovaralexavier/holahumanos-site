@@ -6,7 +6,7 @@ const leadForm = document.getElementById('lead-form');
 const statusText = document.getElementById('form-status');
 const revealItems = document.querySelectorAll('.reveal');
 const progressFill = document.getElementById('scroll-progress-fill');
-const parallaxTarget = document.querySelector('[data-parallax]');
+const logoStage = document.querySelector('.logo-stage');
 const cursor = document.querySelector('.cursor');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -107,13 +107,19 @@ const revealObserver = new IntersectionObserver(
 
 revealItems.forEach((item) => revealObserver.observe(item));
 
-if (parallaxTarget && !prefersReducedMotion) {
-  const updateParallax = () => {
-    const y = window.scrollY * 0.07;
-    parallaxTarget.style.transform = `translate3d(0, ${y}px, 0)`;
-  };
+if (logoStage && !prefersReducedMotion) {
+  logoStage.addEventListener('pointermove', (event) => {
+    const rect = logoStage.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 100;
+    const y = ((event.clientY - rect.top) / rect.height) * 100;
+    logoStage.style.setProperty('--mx', `${x}%`);
+    logoStage.style.setProperty('--my', `${y}%`);
+  });
 
-  window.addEventListener('scroll', updateParallax, { passive: true });
+  logoStage.addEventListener('pointerleave', () => {
+    logoStage.style.setProperty('--mx', '50%');
+    logoStage.style.setProperty('--my', '50%');
+  });
 }
 
 if (cursor && !prefersReducedMotion) {
