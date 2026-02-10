@@ -152,6 +152,35 @@ main {
   gap: clamp(70px, 14vw, 180px);
 }
 
+.brand-focus {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 14px;
+  padding-top: clamp(10px, 3vw, 24px);
+}
+
+.brand-logo-hero {
+  display: block;
+  width: min(92vw, 860px);
+  transform-origin: center;
+  animation: breathe 6s ease-in-out infinite;
+}
+
+.brand-logo-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(1) contrast(1.12);
+}
+
+.brand-focus p {
+  margin: 0;
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  color: var(--muted);
+}
+
 .intro {
   max-width: 980px;
 }
@@ -319,6 +348,16 @@ textarea:focus-visible {
   filter: blur(0);
 }
 
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.012);
+  }
+}
+
 @media (max-width: 760px) {
   .menu-toggle {
     display: inline-grid;
@@ -353,6 +392,10 @@ textarea:focus-visible {
 
   .roles {
     max-width: 100%;
+  }
+
+  .brand-logo-hero {
+    width: min(96vw, 600px);
   }
 
   .cursor {
