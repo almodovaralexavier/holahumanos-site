@@ -3,22 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HolaHumanos | IA rápida, ejecución humana</title>
+    <title>HolaHumanos | Collective</title>
     <meta
       name="description"
-      content="HolaHumanos diseña y ejecuta sistemas acelerados por IA, con criterio humano. Landing minimalista, rápida y orientada a conversión."
+      content="HolaHumanos es un colectivo creativo: humanos senior que usan IA para acelerar diseño, producto y operaciones."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sora:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Sora:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <div class="cursor" aria-hidden="true"></div>
     <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-fill"></span></div>
-    <div class="bg-noise" aria-hidden="true"></div>
 
     <header class="site-header" id="inicio">
       <a class="logo" href="#inicio" aria-label="Inicio HolaHumanos">
@@ -31,89 +31,46 @@
       <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
 
       <nav class="site-nav" id="main-nav">
-        <a href="#metodo">Método</a>
+        <a href="#colectivo">Colectivo</a>
         <a href="#contacto">Contacto</a>
-        <a class="btn btn-primary magnetic" href="#contacto">Agenda una llamada</a>
       </nav>
     </header>
 
     <main>
-      <section class="hero panel reveal" data-delay="0">
-        <p class="eyebrow">SERVICIOS ACELERADOS POR IA, HECHOS POR HUMANOS</p>
-        <h1>
-          Tu próxima
-          <span class="word-wrap"><span id="word-rotator">landing</span></span>
-          no tarda meses.
-        </h1>
-        <p class="hero-copy">
-          Diseñamos, construimos y entregamos activos digitales de alto impacto en días, con procesos inteligentes y criterio senior.
+      <section class="intro" data-parallax>
+        <p class="kicker reveal" data-delay="0">HolaHumanos,</p>
+        <h1 class="reveal" data-delay="80">Un colectivo creativo de humanos acelerados por IA.</h1>
+        <p class="lead reveal" data-delay="140">
+          Diseñamos, construimos y afinamos productos, marcas y sistemas digitales con una mezcla precisa de criterio humano y velocidad computacional.
         </p>
-
-        <div class="hero-actions">
-          <a class="btn btn-primary magnetic" href="#contacto">Empezar ahora</a>
-          <a class="btn btn-ghost" href="#metodo">Ver cómo funciona</a>
-        </div>
-
-        <div class="hero-stage" aria-hidden="true">
-          <div class="orb orb-a"></div>
-          <div class="orb orb-b"></div>
-          <div class="orb orb-c"></div>
-          <div class="stage-card" data-depth="0.05">
-            <p>Entrega real</p>
-            <strong>72h Sprint</strong>
-          </div>
-          <div class="stage-line" data-depth="0.12"></div>
-        </div>
-
-        <div class="stats">
-          <article>
-            <strong>72h</strong>
-            <span>Primer release funcional</span>
-          </article>
-          <article>
-            <strong>+120</strong>
-            <span>Implementaciones lanzadas</span>
-          </article>
-          <article>
-            <strong>-38%</strong>
-            <span>Tiempo operativo promedio</span>
-          </article>
-        </div>
       </section>
 
-      <section class="method" id="metodo">
-        <div class="section-head reveal" data-delay="120">
-          <p class="eyebrow">MÉTODO</p>
-          <h2>Menos presentación.<br />Más ejecución.</h2>
-        </div>
-
-        <div class="method-grid">
-          <article class="method-card tilt-card reveal" data-delay="180">
-            <span>01</span>
-            <h3>Diagnóstico</h3>
-            <p>Detectamos dónde estás perdiendo velocidad y definimos una ruta concreta.</p>
-          </article>
-
-          <article class="method-card tilt-card reveal" data-delay="240">
-            <span>02</span>
-            <h3>Producción</h3>
-            <p>Diseño y build en sprint corto, con automatización donde sí aporta valor.</p>
-          </article>
-
-          <article class="method-card tilt-card reveal" data-delay="300">
-            <span>03</span>
-            <h3>Escalado</h3>
-            <p>Dejamos el sistema documentado para que tu equipo crezca sin fricción.</p>
-          </article>
-        </div>
+      <section class="collective" id="colectivo">
+        <p class="roles reveal" data-delay="40">
+          estrategas · diseñadores · ingenieros · storytellers · operadores · growth leaders · motion designers · investigadores
+        </p>
       </section>
 
-      <section class="cta panel reveal" id="contacto" data-delay="160">
-        <p class="eyebrow">CONTACTO</p>
-        <h2>Hablemos de tu próximo sprint</h2>
-        <p>Cuéntanos qué quieres lanzar y te respondemos hoy.</p>
+      <section class="principles">
+        <article class="principle reveal" data-delay="20">
+          <h2>Menos reuniones.</h2>
+          <p>Más decisiones claras.</p>
+        </article>
+        <article class="principle reveal" data-delay="80">
+          <h2>Menos promesa.</h2>
+          <p>Más entregable.</p>
+        </article>
+        <article class="principle reveal" data-delay="140">
+          <h2>Menos ruido.</h2>
+          <p>Más impacto.</p>
+        </article>
+      </section>
 
-        <form id="lead-form" novalidate>
+      <section class="contact" id="contacto">
+        <p class="kicker reveal" data-delay="0">Contacto</p>
+        <h3 class="reveal" data-delay="60">Cuéntanos qué necesitas lanzar.</h3>
+
+        <form id="lead-form" novalidate class="reveal" data-delay="120">
           <label>
             Nombre
             <input type="text" name="nombre" required minlength="2" autocomplete="name" />
@@ -123,14 +80,14 @@
             <input type="email" name="email" required autocomplete="email" />
           </label>
           <label>
-            Objetivo
+            Proyecto
             <textarea name="mensaje" rows="4" required minlength="10"></textarea>
           </label>
 
           <div class="form-actions">
-            <button class="btn btn-primary magnetic" type="submit">Enviar</button>
+            <button class="btn" type="submit">Enviar</button>
             <a
-              class="btn btn-ghost"
+              class="link-cta"
               href="https://wa.me/17868279913?text=Hola%20HolaHumanos%2C%20quiero%20acelerar%20un%20proyecto"
               target="_blank"
               rel="noopener noreferrer"

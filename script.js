@@ -6,10 +6,8 @@ const leadForm = document.getElementById('lead-form');
 const statusText = document.getElementById('form-status');
 const revealItems = document.querySelectorAll('.reveal');
 const progressFill = document.getElementById('scroll-progress-fill');
-const wordRotator = document.getElementById('word-rotator');
-const heroStage = document.querySelector('.hero-stage');
-const parallaxItems = document.querySelectorAll('[data-depth]');
-const magneticItems = document.querySelectorAll('.magnetic');
+const parallaxTarget = document.querySelector('[data-parallax]');
+const cursor = document.querySelector('.cursor');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 if (yearSpan) {
@@ -47,13 +45,12 @@ if (leadForm && statusText) {
 
     if (!leadForm.checkValidity()) {
       statusText.className = 'error';
-      statusText.textContent = 'Completa los campos antes de enviar.';
+      statusText.textContent = 'Completa los campos obligatorios.';
       leadForm.reportValidity();
       return;
     }
 
-    const emailBody = [`Nombre: ${nombre}`, `Email: ${email}`, `Objetivo: ${mensaje}`].join('\n');
-
+    const emailBody = [`Nombre: ${nombre}`, `Email: ${email}`, `Proyecto: ${mensaje}`].join('\n');
     const subject = encodeURIComponent('Nuevo lead desde holahumanos_site');
     const body = encodeURIComponent(emailBody);
     const mailtoUrl = `mailto:hola@holahumanos.com?subject=${subject}&body=${body}`;
@@ -69,7 +66,7 @@ if (leadForm && statusText) {
 
     window.location.href = mailtoUrl;
     statusText.className = 'ok';
-    statusText.textContent = 'Perfecto. Te abrimos tu correo para enviar el mensaje.';
+    statusText.textContent = 'Abrimos tu correo para enviar el mensaje.';
     leadForm.reset();
   });
 }
@@ -106,73 +103,37 @@ const revealObserver = new IntersectionObserver(
 
 revealItems.forEach((item) => revealObserver.observe(item));
 
-if (wordRotator && !prefersReducedMotion) {
-  const words = ['landing', 'embudo', 'sistema', 'operación'];
-  let current = 0;
-
-  window.setInterval(() => {
-    wordRotator.classList.add('is-swapping');
-
-    window.setTimeout(() => {
-      current = (current + 1) % words.length;
-      wordRotator.textContent = words[current];
-      wordRotator.classList.remove('is-swapping');
-    }, 250);
-  }, 2200);
-}
-
-if (heroStage && parallaxItems.length > 0 && !prefersReducedMotion) {
-  const moveParallax = (event) => {
-    const rect = heroStage.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-
-    const deltaX = (event.clientX - centerX) / rect.width;
-    const deltaY = (event.clientY - centerY) / rect.height;
-
-    parallaxItems.forEach((item) => {
-      const depth = Number(item.getAttribute('data-depth') || '0');
-      const moveX = deltaX * depth * 120;
-      const moveY = deltaY * depth * 120;
-      item.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
-    });
+if (parallaxTarget && !prefersReducedMotion) {
+  const updateParallax = () => {
+    const y = window.scrollY * 0.07;
+    parallaxTarget.style.transform = `translate3d(0, ${y}px, 0)`;
   };
 
-  window.addEventListener('pointermove', moveParallax, { passive: true });
+  window.addEventListener('scroll', updateParallax, { passive: true });
 }
 
-if (!prefersReducedMotion) {
-  magneticItems.forEach((item) => {
-    item.addEventListener('pointermove', (event) => {
-      const rect = item.getBoundingClientRect();
-      const relX = event.clientX - (rect.left + rect.width / 2);
-      const relY = event.clientY - (rect.top + rect.height / 2);
+if (cursor && !prefersReducedMotion) {
+  window.addEventListener(
+    'pointermove',
+    (event) => {
+      cursor.style.opacity = '1';
+      cursor.style.left = `${event.clientX}px`;
+      cursor.style.top = `${event.clientY}px`;
+    },
+    { passive: true },
+  );
 
-      item.style.transform = `translate(${relX * 0.12}px, ${relY * 0.12}px)`;
+  const focusTargets = document.querySelectorAll('a, button, input, textarea');
+
+  focusTargets.forEach((target) => {
+    target.addEventListener('pointerenter', () => {
+      cursor.style.width = '30px';
+      cursor.style.height = '30px';
     });
 
-    item.addEventListener('pointerleave', () => {
-      item.style.transform = '';
-    });
-  });
-}
-
-const tiltCards = document.querySelectorAll('.tilt-card');
-
-if (!prefersReducedMotion) {
-  tiltCards.forEach((card) => {
-    card.addEventListener('pointermove', (event) => {
-      const rect = card.getBoundingClientRect();
-      const offsetX = (event.clientX - rect.left) / rect.width - 0.5;
-      const offsetY = (event.clientY - rect.top) / rect.height - 0.5;
-      const rotateX = -offsetY * 8;
-      const rotateY = offsetX * 10;
-
-      card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-    });
-
-    card.addEventListener('pointerleave', () => {
-      card.style.transform = '';
+    target.addEventListener('pointerleave', () => {
+      cursor.style.width = '';
+      cursor.style.height = '';
     });
   });
 }
