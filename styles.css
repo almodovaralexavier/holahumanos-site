@@ -420,6 +420,14 @@ body.is-ready .logo-stage::after {
   animation: ringAmbient 13s ease-in-out 0s infinite;
 }
 
+.logo-stage.burst .logo-ray {
+  animation: rayBurst 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
+}
+
+.logo-stage.burst .logo-ring {
+  animation: ringBurst 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
+}
+
 body.is-ready .brand-focus p {
   animation: textLift 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.45s forwards;
 }
@@ -511,6 +519,38 @@ h1 {
   gap: 4px;
   position: relative;
   overflow: hidden;
+  transition: transform 0.28s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.28s ease;
+  transform-style: preserve-3d;
+}
+
+.principle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 10%,
+    rgba(255, 255, 255, 0.35) 28%,
+    transparent 42%,
+    transparent 58%,
+    rgba(255, 255, 255, 0.28) 76%,
+    transparent 90%
+  );
+  transform: translateX(-120%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.principle:hover,
+.principle:focus-within {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.principle:hover::before,
+.principle:focus-within::before {
+  opacity: 1;
+  transform: translateX(120%);
+  transition: transform 0.85s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.24s ease;
 }
 
 .principle::after {

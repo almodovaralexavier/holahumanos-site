@@ -10,6 +10,7 @@ const progressFill = document.getElementById('scroll-progress-fill');
 const logoStage = document.querySelector('.logo-stage');
 const cursor = document.querySelector('.cursor');
 const introFilm = document.querySelector('.intro-film');
+const principleCards = document.querySelectorAll('.principle');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 window.requestAnimationFrame(() => {
@@ -153,6 +154,15 @@ if (logoStage && !prefersReducedMotion) {
   );
 
   logoVisibilityObserver.observe(logoStage);
+
+  logoStage.addEventListener('click', () => {
+    logoStage.classList.remove('burst');
+    // Restart burst animation on repeated clicks.
+    window.requestAnimationFrame(() => {
+      logoStage.classList.add('burst');
+      window.setTimeout(() => logoStage.classList.remove('burst'), 950);
+    });
+  });
 }
 
 if (cursor && !prefersReducedMotion) {
@@ -194,6 +204,23 @@ if (!prefersReducedMotion) {
 
     target.addEventListener('pointerleave', () => {
       target.style.transform = '';
+    });
+  });
+}
+
+if (!prefersReducedMotion && principleCards.length > 0) {
+  principleCards.forEach((card) => {
+    card.addEventListener('pointermove', (event) => {
+      const rect = card.getBoundingClientRect();
+      const offsetX = (event.clientX - rect.left) / rect.width - 0.5;
+      const offsetY = (event.clientY - rect.top) / rect.height - 0.5;
+      const rotateX = -offsetY * 4;
+      const rotateY = offsetX * 6;
+      card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-3px)`;
+    });
+
+    card.addEventListener('pointerleave', () => {
+      card.style.transform = '';
     });
   });
 }
