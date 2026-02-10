@@ -10,6 +10,10 @@ const parallaxTarget = document.querySelector('[data-parallax]');
 const cursor = document.querySelector('.cursor');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+window.requestAnimationFrame(() => {
+  document.body.classList.add('is-ready');
+});
+
 if (yearSpan) {
   yearSpan.textContent = String(new Date().getFullYear());
 }

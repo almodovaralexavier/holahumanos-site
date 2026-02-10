@@ -158,19 +158,96 @@ main {
   text-align: center;
   gap: 14px;
   padding-top: clamp(10px, 3vw, 24px);
+  position: relative;
+}
+
+.logo-stage {
+  position: relative;
+  width: min(94vw, 920px);
+  min-height: clamp(220px, 46vw, 520px);
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+}
+
+.logo-ray {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(86vw, 820px);
+  height: 1px;
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(var(--r, 0deg)) scaleX(0.08);
+  transform-origin: center;
+  background: linear-gradient(90deg, transparent, rgba(35, 35, 35, 0.38), transparent);
+}
+
+.ray-a {
+  --r: 0deg;
+  --d: 0s;
+}
+
+.ray-b {
+  --r: 90deg;
+  --d: 0.07s;
+}
+
+.ray-c {
+  --r: 36deg;
+  --d: 0.11s;
+}
+
+.ray-d {
+  --r: -36deg;
+  --d: 0.15s;
+}
+
+.logo-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 999px;
+  border: 1px solid rgba(30, 30, 30, 0.22);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.55);
+}
+
+.ring-a {
+  width: min(22vw, 220px);
+  aspect-ratio: 1;
+  --d: 0.08s;
+}
+
+.ring-b {
+  width: min(32vw, 320px);
+  aspect-ratio: 1;
+  --d: 0.14s;
+}
+
+.ring-c {
+  width: min(44vw, 460px);
+  aspect-ratio: 1;
+  --d: 0.2s;
 }
 
 .brand-logo-hero {
+  position: relative;
+  z-index: 3;
   display: block;
-  width: min(92vw, 860px);
+  opacity: 0;
   transform-origin: center;
-  animation: breathe 6s ease-in-out infinite;
+  transform: scale(0.92);
+  clip-path: inset(50% 0 50% 0 round 10px);
+  filter: blur(12px);
 }
 
 .brand-logo-hero img {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: min(92vw, 840px);
+  max-height: clamp(220px, 54vw, 640px);
   height: auto;
+  margin-inline: auto;
   object-fit: contain;
   filter: grayscale(1) contrast(1.12);
 }
@@ -179,6 +256,24 @@ main {
   margin: 0;
   font-size: clamp(0.95rem, 1.8vw, 1.15rem);
   color: var(--muted);
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+body.is-ready .brand-logo-hero {
+  animation: logoReveal 1.35s cubic-bezier(0.19, 1, 0.22, 1) 0.08s forwards;
+}
+
+body.is-ready .logo-ray {
+  animation: rayBurst 1s cubic-bezier(0.23, 1, 0.32, 1) calc(0.3s + var(--d, 0s)) forwards;
+}
+
+body.is-ready .logo-ring {
+  animation: ringBurst 1.1s cubic-bezier(0.23, 1, 0.32, 1) calc(0.28s + var(--d, 0s)) forwards;
+}
+
+body.is-ready .brand-focus p {
+  animation: textLift 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.45s forwards;
 }
 
 .intro {
@@ -348,13 +443,55 @@ textarea:focus-visible {
   filter: blur(0);
 }
 
-@keyframes breathe {
+@keyframes logoReveal {
   0%,
-  100% {
-    transform: scale(1);
+  20% {
+    opacity: 0;
+    transform: scale(0.92);
+    clip-path: inset(50% 0 50% 0 round 10px);
+    filter: blur(12px);
   }
-  50% {
-    transform: scale(1.012);
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    clip-path: inset(0 0 0 0 round 10px);
+    filter: blur(0);
+  }
+}
+
+@keyframes rayBurst {
+  0% {
+    opacity: 0.85;
+    transform: translate(-50%, -50%) rotate(var(--r, 0deg)) scaleX(0.06);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--r, 0deg)) scaleX(1);
+  }
+}
+
+@keyframes ringBurst {
+  0% {
+    opacity: 0.38;
+    transform: translate(-50%, -50%) scale(0.52);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.22);
+  }
+}
+
+@keyframes textLift {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -395,7 +532,11 @@ textarea:focus-visible {
   }
 
   .brand-logo-hero {
-    width: min(96vw, 600px);
+    width: auto;
+  }
+
+  .brand-logo-hero img {
+    max-width: min(95vw, 540px);
   }
 
   .cursor {
